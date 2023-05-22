@@ -13,6 +13,10 @@ crop_list = {"Yam":0, "Maize":1, "Sorghum":2, "Cotton":3, "Cassava":4,
              "Rubber":15, "MilletsSorghum":16, "Plaintain":17, "Acha":18, "SugerCane":19, "Yam.":20,
              "MaizeCocoa":21}
 
+state_list = {"adamawa":0,"bauchi":1,"bayelsa":2,"benue":3,"federal capital territory":4,
+              "kaduna":5,"kano":6,"katsina":7,"kebbi":8,"kogi":9,"kwara":10,"nasarawa":11,
+              "niger":12,"plateau":13,"taraba":14}
+
 
 final_crop = pd.read_csv('crops_dataset_model_building.csv')
 
@@ -30,6 +34,16 @@ def picking_crops(crop):
             pass
     return crop_types
 
+
+def picking_state(state):
+  states = state.lower()
+  for key, value in state_list.items():
+    if states == key:
+      state_lst = value
+    else:
+        pass
+        
+  return state_lst
 
 value_crop = picking_crops(farmers_input)
 
