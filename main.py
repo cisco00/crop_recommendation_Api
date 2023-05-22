@@ -23,10 +23,10 @@ def farmers_input():
 def picking_crops(crop):
     crop_types = 0
     for key, value in crop_list.items():
-        if crop != key:
-            Exception('Crop not found')
-        else:
+        if crop == key:
             crop_types = value
+        else:
+            Exception('Crop not found')
     return crop_types
 
 
@@ -41,7 +41,7 @@ crop_index = getting_crop_index(value_crop)
 
 
 @app.route('/api/v1/recommend')
-def hello_world():  # put application's code here
+def recommendation():  # put application's code here
     return str(picking_crops(farmers_input()))
 
 
