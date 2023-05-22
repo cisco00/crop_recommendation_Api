@@ -21,11 +21,12 @@ def farmers_input():
 
 
 def picking_crops(crop):
+    crop_types = 0
     for key, value in crop_list.items():
-        if crop == key:
-            crop_types: int | Any = value
+        if crop != key:
+            Exception('Crop not found')
         else:
-            pass
+            crop_types = value
     return crop_types
 
 
@@ -37,13 +38,11 @@ def getting_crop_index(crop):
 
 
 crop_index = getting_crop_index(value_crop)
-crop_index
 
 
-@app.route('/api/v1/recommend', methods=['POST'])
+@app.route('/api/v1/recommend')
 def hello_world():  # put application's code here
-    return picking_crops(farmers_input())
-
+    return str(picking_crops(farmers_input()))
 
 
 if __name__ == '__main__':
