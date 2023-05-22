@@ -42,7 +42,6 @@ crop_index = getting_crop_index(value_crop)
 crop_index
 
 
-
 @app.route('/')
 def hello_world():  # put application's code herea
     return 'Hello World!'
