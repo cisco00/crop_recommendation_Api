@@ -33,18 +33,20 @@ def picking_crops(crop):
         value = crop_list[crop]
     except KeyError:
         print("The crop is not found in the list of crops trained with this model")
+
     return value
 
 
 def picking_state(state):
-  states = state.lower()
-  for key, value in state_list.items():
-    if states == key:
-      state_lst = value
-    else:
-        pass
-        
-  return state_lst
+  
+  
+  states = None
+  try:
+      states = state_list[state]
+  except KeyError:
+      print("States is not listed among this dataset")
+
+  return states
 
 
 value_crop = picking_crops(farmers_input)
