@@ -4,7 +4,7 @@ from flask import Flask
 import pickle
 
 app = Flask(__name__)
-model = pickle.load(open('model.pkl', 'r'))
+model = pickle.load(open('models/model.pkl', 'rb'))
 
 crop_list = {"Yam":0, "Maize":1, "Sorghum":2, "Cotton":3, "Cassava":4,
              "Millets":5, "Groundnuts":6, "Rice":7, "Beans":8, "Cocoa":9,
@@ -17,7 +17,7 @@ state_list = {"adamawa":0,"bauchi":1,"bayelsa":2,"benue":3,"federal capital terr
               "niger":12,"plateau":13,"taraba":14}
 
 
-final_crop1 = pd.read_csv('crops_dataset_model_building.csv')
+final_crop1 = pd.read_csv('models/crops_dataset_model_building.csv')
 
 final_crop = final_crop1.iloc[:, 1:]
 
