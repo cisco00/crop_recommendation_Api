@@ -4,7 +4,7 @@ from flask import Flask
 import pickle
 
 app = Flask(__name__)
-# model = pickle.load(open('model.pkl', 'r'))
+model = pickle.load(open('model.pkl', 'r'))
 
 crop_list = {"Yam":0, "Maize":1, "Sorghum":2, "Cotton":3, "Cassava":4,
              "Millets":5, "Groundnuts":6, "Rice":7, "Beans":8, "Cocoa":9,
