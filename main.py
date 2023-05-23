@@ -21,13 +21,14 @@ def farmers_input():
 
 
 def picking_crops(crop):
-    crop_types = 0
-    for key, value in crop_list.items():
-        if crop != key:
-            Exception('Crop not found')
-        else:
-            crop_types = value
-    return crop_types
+  
+    value = None
+    try:
+        value = crop_list[crop]
+    except KeyError:
+        print("The crop is not found in the list of crops trained with this model")
+    return value
+
 
 
 value_crop = picking_crops(farmers_input)
