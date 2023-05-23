@@ -4,7 +4,7 @@ from flask import Flask
 import pickle
 
 app = Flask(__name__)
-# model = pickle.load(open('model.pkl', 'r'))
+model = pickle.load(open('model.pkl', 'r'))
 
 
 crop_list = {"Yam":0, "Maize":1, "Sorghum":2, "Cotton":3, "Cassava":4,
@@ -19,8 +19,10 @@ state_list = {"adamawa":0,"bauchi":1,"bayelsa":2,"benue":3,"federal capital terr
 
 
 final_crop1 = pd.read_csv('crops_dataset_model_building.csv')
-
-final_crop = final_crop1.iloc[:, 1:]
+df3 = final_crop1.iloc[:, 1:]
+final_crop = df3.iloc[:, 1:]
+final_crop.set_index('index', inplace=True)
+final_crop.head()
 
 def farmers_input():
     user_input = input("Enter a crop: ")
