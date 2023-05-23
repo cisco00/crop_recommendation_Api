@@ -6,6 +6,7 @@ import pickle
 app = Flask(__name__)
 # model = pickle.load(open('model.pkl', 'r'))
 
+
 crop_list = {"Yam":0, "Maize":1, "Sorghum":2, "Cotton":3, "Cassava":4,
              "Millets":5, "Groundnuts":6, "Rice":7, "Beans":8, "Cocoa":9,
              "Irish Potatoes":10, "Oil Palm":11, "Sugercane":12, "Vegetables":13, "Banana":14,
@@ -37,6 +38,8 @@ def picking_crops(crop):
 
 
 def picking_state(state):
+  
+  
   states = None
   try:
       states = state_list[state]
