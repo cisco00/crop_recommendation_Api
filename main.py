@@ -14,8 +14,9 @@ crop_list = {"Yam":0, "Maize":1, "Sorghum":2, "Cotton":3, "Cassava":4,
              "MaizeCocoa":21}
 
 
-final_crop = pd.read_csv('crops_dataset_model_building.csv')
+final_crop1 = pd.read_csv('crops_dataset_model_building.csv')
 
+final_crop = final_crop1.iloc[:, 1:]
 
 def farmers_input():
     user_input = input("Enter a crop: ")
