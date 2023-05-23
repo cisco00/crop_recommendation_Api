@@ -3,7 +3,6 @@ import pandas as pd
 from flask import Flask
 import pickle
 
-
 app = Flask(__name__)
 # model = pickle.load(open('model.pkl', 'r'))
 
@@ -12,6 +11,10 @@ crop_list = {"Yam":0, "Maize":1, "Sorghum":2, "Cotton":3, "Cassava":4,
              "Irish Potatoes":10, "Oil Palm":11, "Sugercane":12, "Vegetables":13, "Banana":14,
              "Rubber":15, "MilletsSorghum":16, "Plaintain":17, "Acha":18, "SugerCane":19, "Yam.":20,
              "MaizeCocoa":21}
+
+state_list = {"adamawa":0,"bauchi":1,"bayelsa":2,"benue":3,"federal capital territory":4,
+              "kaduna":5,"kano":6,"katsina":7,"kebbi":8,"kogi":9,"kwara":10,"nasarawa":11,
+              "niger":12,"plateau":13,"taraba":14}
 
 
 final_crop1 = pd.read_csv('crops_dataset_model_building.csv')
@@ -32,6 +35,17 @@ def picking_crops(crop):
     return value
 
 
+def picking_state(state):
+  states = state.lower()
+  for key, value in state_list.items():
+    if states == key:
+      state_lst = value
+    else:
+        pass
+        
+  return state_lst
+
+
 value_crop = picking_crops(farmers_input)
 
 
@@ -40,12 +54,11 @@ def getting_crop_index(crop):
 
 
 crop_index = getting_crop_index(value_crop)
-crop_index
 
 
-@app.route('/')
-def hello_world():  # put application's code herea
-    return 'Hello World!'
+@app.route('/api/v1/recommend')
+def hello_world():  # put application's code here
+    return str(picking_crops(farmers_input()))
 
 
 if __name__ == '__main__':
