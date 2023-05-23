@@ -3,9 +3,9 @@ import pandas as pd
 from flask import Flask
 import pickle
 
-
 app = Flask(__name__)
 # model = pickle.load(open('model.pkl', 'r'))
+
 
 crop_list = {"Yam":0, "Maize":1, "Sorghum":2, "Cotton":3, "Cassava":4,
              "Millets":5, "Groundnuts":6, "Rice":7, "Beans":8, "Cocoa":9,
@@ -27,12 +27,14 @@ def farmers_input():
 
 
 def picking_crops(crop):
-    for key, value in crop_list.items():
-        if crop == key:
-            crop_types: int | Any = value
-        else:
-            pass
-    return crop_types
+  
+    value = None
+    try:
+        value = crop_list[crop]
+    except KeyError:
+        print("The crop is not found in the list of crops trained with this model")
+    return value
+
 
 
 def picking_state(state):
@@ -53,12 +55,11 @@ def getting_crop_index(crop):
 
 
 crop_index = getting_crop_index(value_crop)
-crop_index
 
 
-@app.route('/')
-def hello_world():  # put application's code herea
-    return 'Hello World!'
+@app.route('/api/v1/recommend')
+def hello_world():  # put application's code here
+    return str(picking_crops(farmers_input()))
 
 
 if __name__ == '__main__':

@@ -183,14 +183,8 @@ tomli==2.0.1
 tornado==6.2
 tqdm==4.65.0
 traitlets==5.9.0
-ubuntu-advantage-tools==8001
-ubuntu-drivers-common==0.0.0
-ufw==0.36.1
-unattended-upgrades==0.1
 uri-template==1.2.0
 urllib3==1.26.5
-usb-creator==0.3.7
-virtualenv==20.13.0+ds
 wadllib==1.3.6
 wcwidth==0.2.6
 webcolors==1.12
@@ -198,7 +192,6 @@ webencodings==0.5.1
 websocket-client==1.5.1
 Werkzeug==2.2.3
 xdg==5
-xkit==0.0.0
 y-py==0.5.9
 yfinance==0.2.17
 ypy-websocket==0.8.2
