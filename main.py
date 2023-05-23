@@ -18,8 +18,9 @@ state_list = {"adamawa":0,"bauchi":1,"bayelsa":2,"benue":3,"federal capital terr
               "niger":12,"plateau":13,"taraba":14}
 
 
-final_crop = pd.read_csv('crops_dataset_model_building.csv')
+final_crop1 = pd.read_csv('crops_dataset_model_building.csv')
 
+final_crop = final_crop1.iloc[:, 1:]
 
 def farmers_input():
     user_input = input("Enter a crop: ")
