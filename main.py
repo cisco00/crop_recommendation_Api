@@ -21,13 +21,14 @@ def farmers_input():
 
 
 def picking_crops(crop):
-    crop_types = 0
-    for key, value in crop_list.items():
-        if crop == key:
-            crop_types = value
-        else:
-            Exception('Crop not found')
-    return crop_types
+  
+    value = None
+    try:
+        value = crop_list[crop]
+    except KeyError:
+        print("The crop is not found in the list of crops trained with this model")
+    return value
+
 
 
 value_crop = picking_crops(farmers_input)
@@ -41,7 +42,7 @@ crop_index = getting_crop_index(value_crop)
 
 
 @app.route('/api/v1/recommend')
-def recommendation():  # put application's code here
+def hello_world():  # put application's code here
     return str(picking_crops(farmers_input()))
 
 

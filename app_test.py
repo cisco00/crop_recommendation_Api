@@ -12,10 +12,6 @@ crop_list = {"Yam":0, "Maize":1, "Sorghum":2, "Cotton":3, "Cassava":4,
              "MaizeCocoa":21}
 
 
-def test_hello():
-    assert hello_world() == "Hello World!"
-
-
 def test_hello_world():
     assert hello_world() == "Hello World!"
 
