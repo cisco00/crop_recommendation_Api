@@ -5,7 +5,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 
 app = Flask(__name__)
 
-numerical_data = pd.read_csv('model_data/numerical_data')
+numerical_data = pd.read_csv('models/numerical dataset.csv')
 
 
 crop_list = {"Yam": 0, "Maize": 1, "Sorghum": 2, "Cotton": 3, "Cassava": 4,
@@ -21,6 +21,12 @@ state_list = {"adamawa": 0, "bauchi": 1, "bayelsa": 2, "benue": 3, "federal capi
 final_crop1 = pd.read_csv('models/crops_dataset_model_building.csv')
 final_crop = final_crop1.iloc[:, 1:]
 final_crop.head()
+
+
+
+
+cosine_sim = cosine_similarity(numerical_data)
+
 
 
 def farmers_input():
@@ -66,15 +72,12 @@ def getting_crop_index(crop):
     return final_crop[final_crop.MAJOR_CROP == crop]["index"].values[0]
 
 
-crop_index = getting_crop_index(value_crop)
-
-similar_crops = list(enumerate(cosine_similarity[crop_index]))
-
-
 def get_crop_from_index(index):
     return final_crop[final_crop.index == index]["MAJOR_CROP"].values[0]
 
 
+crop_index = getting_crop_index(value_crop)
+similar_crops = list(enumerate(cosine_sim[crop_index]))
 lst = []
 
 
