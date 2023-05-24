@@ -1,4 +1,3 @@
-from typing import Any
 import pandas as pd
 from flask import Flask
 import pickle
@@ -6,26 +5,35 @@ import pickle
 app = Flask(__name__)
 # model = pickle.load(open('model.pkl', 'r'))
 
-crop_list = {"Yam":0, "Maize":1, "Sorghum":2, "Cotton":3, "Cassava":4,
-             "Millets":5, "Groundnuts":6, "Rice":7, "Beans":8, "Cocoa":9,
-             "Irish Potatoes":10, "Oil Palm":11, "Sugercane":12, "Vegetables":13, "Banana":14,
-             "Rubber":15, "MilletsSorghum":16, "Plaintain":17, "Acha":18, "SugerCane":19, "Yam.":20,
-             "MaizeCocoa":21}
+crop_list = {"Yam": 0, "Maize": 1, "Sorghum": 2, "Cotton": 3, "Cassava": 4,
+             "Millets": 5, "Groundnuts": 6, "Rice": 7, "Beans": 8, "Cocoa": 9,
+             "Irish Potatoes": 10, "Oil Palm": 11, "Sugercane": 12, "Vegetables": 13, "Banana": 14,
+             "Rubber": 15, "MilletsSorghum": 16, "Plaintain": 17, "Acha": 18, "SugerCane": 19, "Yam.": 20,
+             "MaizeCocoa": 21}
 
-state_list = {"adamawa":0,"bauchi":1,"bayelsa":2,"benue":3,"federal capital territory":4,
-              "kaduna":5,"kano":6,"katsina":7,"kebbi":8,"kogi":9,"kwara":10,"nasarawa":11,
-              "niger":12,"plateau":13,"taraba":14}
+state_list = {"adamawa": 0, "bauchi": 1, "bayelsa": 2, "benue": 3, "federal capital territory": 4,
+              "kaduna": 5, "kano": 6, "katsina": 7, "kebbi": 8, "kogi": 9, "kwara": 10, "nasarawa": 11,
+              "niger": 12, "plateau": 13, "taraba": 14}
 
-
-final_crop1 = pd.read_csv('models/crops_dataset_model_building.csv')
-df3 = final_crop1.iloc[:, 1:]
-final_crop = df3.iloc[:, 1:]
-final_crop = final_crop.set_index('index', inplace=True)
+final_crop1 = pd.read_csv('crops_dataset_model_building.csv')
+final_crop = final_crop1.iloc[:, 1:]
 final_crop.head()
+
 
 def farmers_input():
     user_input = input("Enter a crop: ")
     return user_input
+
+
+def pickin_crops(crop):
+    crop_type = 0
+    for key, value in crop_list.items():
+        if crop == key:
+            crop_type = value
+        else:
+            pass
+
+    return crop_type
 
 
 def picking_crops(crop):
@@ -39,16 +47,16 @@ def picking_crops(crop):
 
 
 def picking_state(state):
-  states = None
-  try:
-      states = state_list[state]
-  except KeyError:
-      print("States is not listed among this dataset")
+    states = 0
+    for key, value in state_list.items():
+        if state == key:
+            states = value
+        else:
+            pass
+    return states
 
-  return states
 
-
-value_crop = picking_crops(farmers_input)
+value_crop = pickin_crops(farmers_input)
 
 
 def getting_crop_index(crop):
