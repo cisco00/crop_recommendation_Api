@@ -14,9 +14,14 @@ crop_list = {"Yam": 0, "Maize": 1, "Sorghum": 2, "Cotton": 3, "Cassava": 4,
              "Rubber": 15, "MilletsSorghum": 16, "Plaintain": 17, "Acha": 18, "SugerCane": 19, "Yam.": 20,
              "MaizeCocoa": 21}
 
+<<<<<<< HEAD
+final_crop = pd.read_csv('crops_dataset_model_building.csv')
+final_crop = final_crop.drop(['Unnamed: 0', 'index'], axis=1)
+=======
 state_list = {"adamawa": 0, "bauchi": 1, "bayelsa": 2, "benue": 3, "federal capital territory": 4,
               "kaduna": 5, "kano": 6, "katsina": 7, "kebbi": 8, "kogi": 9, "kwara": 10, "nasarawa": 11,
               "niger": 12, "plateau": 13, "taraba": 14}
+>>>>>>> 678ea7d706912f47b32babee6e6f10b9d6bb7bfb
 
 
 data = pd.read_csv("data_index_file.csv")
@@ -71,7 +76,10 @@ sorted_similar_crop = sorted(similar_crops, key=lambda x: x[1], reverse=False)
 
 
 def get_crop_from_index(index):
-    return final_df[final_df.index == index]["MAJOR_CROP"].values[0]
+    try:
+        return final_df[final_df.index == index]["MAJOR_CROP"].values[0]
+    except:
+        return None
 
 # lst = []
 # i=0
