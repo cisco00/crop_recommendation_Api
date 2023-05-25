@@ -76,7 +76,10 @@ sorted_similar_crop = sorted(similar_crops, key=lambda x: x[1], reverse=False)
 
 
 def get_crop_from_index(index):
-    return final_df[final_df.index == index]["MAJOR_CROP"].values[0]
+    try:
+        return final_df[final_df.index == index]["MAJOR_CROP"].values[0]
+    except:
+        return None
 
 # lst = []
 # i=0
