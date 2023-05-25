@@ -18,16 +18,13 @@ state_list = {"adamawa": 0, "bauchi": 1, "bayelsa": 2, "benue": 3, "federal capi
               "kaduna": 5, "kano": 6, "katsina": 7, "kebbi": 8, "kogi": 9, "kwara": 10, "nasarawa": 11,
               "niger": 12, "plateau": 13, "taraba": 14}
 
+
 final_crop1 = pd.read_csv('models/crops_dataset_model_building.csv')
 final_crop = final_crop1.iloc[:, 1:]
 final_crop.head()
 
 
-
-
 cosine_sim = cosine_similarity(numerical_data)
-
-
 
 def farmers_input():
     user_input = input("Enter a crop: ")
