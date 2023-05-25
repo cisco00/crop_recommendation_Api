@@ -1,11 +1,12 @@
 import pandas as pd
-from flask import Flask
+from flask import Flask, jsonify
+import pickle
 from sklearn.metrics.pairwise import cosine_similarity
 
-import pickle
-
 app = Flask(__name__)
-# model = pickle.load(open('model.pkl', 'r'))
+
+numerical_data = pd.read_csv('models/numerical dataset.csv')
+
 
 crop_list = {"Yam": 0, "Maize": 1, "Sorghum": 2, "Cotton": 3, "Cassava": 4,
              "Millets": 5, "Groundnuts": 6, "Rice": 7, "Beans": 8, "Cocoa": 9,
@@ -13,9 +14,14 @@ crop_list = {"Yam": 0, "Maize": 1, "Sorghum": 2, "Cotton": 3, "Cassava": 4,
              "Rubber": 15, "MilletsSorghum": 16, "Plaintain": 17, "Acha": 18, "SugerCane": 19, "Yam.": 20,
              "MaizeCocoa": 21}
 
+<<<<<<< HEAD
+final_crop = pd.read_csv('crops_dataset_model_building.csv')
+final_crop = final_crop.drop(['Unnamed: 0', 'index'], axis=1)
+=======
 state_list = {"adamawa": 0, "bauchi": 1, "bayelsa": 2, "benue": 3, "federal capital territory": 4,
               "kaduna": 5, "kano": 6, "katsina": 7, "kebbi": 8, "kogi": 9, "kwara": 10, "nasarawa": 11,
               "niger": 12, "plateau": 13, "taraba": 14}
+>>>>>>> 678ea7d706912f47b32babee6e6f10b9d6bb7bfb
 
 
 data = pd.read_csv("data_index_file.csv")
@@ -23,8 +29,11 @@ final_df = data.iloc[:, 1:]
 
 df1 = pd.read_csv('crops_dataset_model_building.csv')
 df2 = df1.iloc[:, 1:]
+
 model = cosine_similarity(df2)
 
+
+cosine_sim = cosine_similarity(numerical_data)
 
 def farmers_input():
     user_input = input("Enter a crop: ")
@@ -61,6 +70,7 @@ def getting_crop_index(crop):
 
 crop_index = getting_crop_index(value_crop)
 
+
 similar_crops = list(enumerate(model[crop_index]))
 sorted_similar_crop = sorted(similar_crops, key=lambda x: x[1], reverse=False)
 
@@ -83,6 +93,7 @@ def get_crop_from_index(index):
 
 @app.route('/api/v1/recommend')
 def hello_world():  # put application's code here
+  
     lst = []
     i = 0
     for crop in sorted_similar_crop:
