@@ -101,7 +101,7 @@ def get_state_from_index(state):
 state_dict_value = switching_variables(farmers_input)
 
 #getting the index of the crop from the dataframe table
-get_state_index = getting_crop_index(state_dict_value)
+get_state_index = getting_state_index(state_dict_value)
 
 similar_state = list(enumerate(model[get_state_index]))
 sorted_similar_state = sorted(similar_state, key=lambda x: x[1], reverse=False)
