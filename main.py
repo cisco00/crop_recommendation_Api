@@ -71,15 +71,6 @@ def get_crop_from_index(index):
     except:
         return None
 
-# lst = []
-# i=0
-# for crop in sorted_similar_crop:
-#     lst.append(get_crop_from_index(crop[0]))
-#     i=i+1
-#     if i>100:
-#         break
-# list(dict.fromkeys(lst))
-
 
 @app.route('/api/v1/recommend')
 def hello_world():  # put application's code here
