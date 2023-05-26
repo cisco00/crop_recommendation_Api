@@ -21,7 +21,7 @@ def test_crops_picked():
 
 
 def test_api_response():
-    base_url = "courses.csrrinzqubik.us-east-1.rds.amazonaws.com"
+    base_url = "http://127.0.0.1:5000/api/v1/recommend"
     response = requests.get(base_url + "/endpoint")
     assert response.status == 200, "API is not working. Status code: " + str(response.status_code)
 

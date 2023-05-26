@@ -5,7 +5,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 import pickle
 
 app = Flask(__name__)
-# model = pickle.load(open('model.pkl', 'r'))
+model = pickle.load(open('model.pkl', 'rb'))
 
 crop_list = {"Yam": 0, "Maize": 1, "Sorghum": 2, "Cotton": 3, "Cassava": 4,
              "Millets": 5, "Groundnuts": 6, "Rice": 7, "Beans": 8, "Cocoa": 9,
@@ -23,7 +23,7 @@ final_df = data.iloc[:, 1:]
 
 df1 = pd.read_csv('crops_dataset_model_building.csv')
 df2 = df1.iloc[:, 1:]
-model = cosine_similarity(df2)
+# model = cosine_similarity(df2)
 
 
 def farmers_input():
@@ -31,7 +31,7 @@ def farmers_input():
     return user_input
 
 
-def picking_crop(crop):
+def picking_crops(crop):
   if crop in crop_list:
     value = crop_list[crop]
   else:
@@ -40,16 +40,22 @@ def picking_crop(crop):
 
 
 def picking_state(state):
-    states = 0
-    for key, value in state_list.items():
-        if state == key:
-            states = value
-        else:
-            pass
-    return states
+  if state in state_list:
+    value = state_list[state]
+  else:
+    return -1
+  return value
 
 
-value_crop = picking_crop(farmers_input)
+def switching_variables(user_entry):
+    value = None
+    if user_entry in crop_list:
+        return picking_crops(user_entry)
+    else:
+        if user_entry in state_list:
+            value = picking_state(user_entry)
+            return value
+        return value
 
 
 def getting_crop_index(crop):
@@ -59,9 +65,11 @@ def getting_crop_index(crop):
         return None
 
 
-crop_index = getting_crop_index(value_crop)
+crop_dict_value = switching_variables(farmers_input)
 
-similar_crops = list(enumerate(model[crop_index]))
+get_crop_index = getting_crop_index(crop_dict_value)
+
+similar_crops = list(enumerate(model[get_crop_index]))
 sorted_similar_crop = sorted(similar_crops, key=lambda x: x[1], reverse=False)
 
 
@@ -70,6 +78,29 @@ def get_crop_from_index(index):
         return final_df[final_df.index == index]["MAJOR_CROP"].values[0]
     except:
         return None
+
+
+def getting_state_index(state):
+    try:
+        return final_df[final_df.State == state]['index'].values(0)
+    except:
+        return None
+
+
+def get_state_from_index(state):
+    try:
+        return final_df[final_df.index == state]["State"].values(0)
+    except:
+        return None
+
+# getting the value of the crop key from the dictionary
+state_dict_value = switching_variables(farmers_input)
+
+#getting the index of the crop from the dataframe table
+get_state_index = getting_crop_index(state_dict_value)
+
+similar_state = list(enumerate(model[get_state_index]))
+sorted_similar_state = sorted(similar_state, key=lambda x: x[1], reverse=False)
 
 
 @app.route('/api/v1/recommend')
