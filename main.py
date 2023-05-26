@@ -1,11 +1,10 @@
 import pandas as pd
-from flask import Flask
+from flask import Flask, jsonify
+import pickle
 from sklearn.metrics.pairwise import cosine_similarity
 
-import pickle
-
 app = Flask(__name__)
-model = pickle.load(open('model.pkl', 'rb'))
+
 
 crop_list = {"Yam": 0, "Maize": 1, "Sorghum": 2, "Cotton": 3, "Cassava": 4,
              "Millets": 5, "Groundnuts": 6, "Rice": 7, "Beans": 8, "Cocoa": 9,
@@ -18,13 +17,17 @@ state_list = {"adamawa": 0, "bauchi": 1, "bayelsa": 2, "benue": 3, "federal capi
               "niger": 12, "plateau": 13, "taraba": 14}
 
 
+
 data = pd.read_csv("data_index_file.csv")
 final_df = data.iloc[:, 1:]
 
 df1 = pd.read_csv('crops_dataset_model_building.csv')
 df2 = df1.iloc[:, 1:]
-# model = cosine_similarity(df2)
 
+model = cosine_similarity(df2)
+
+
+cosine_sim = cosine_similarity(numerical_data)
 
 def farmers_input():
     user_input = input("Enter a crop: ")
@@ -70,6 +73,7 @@ crop_dict_value = switching_variables(farmers_input)
 get_crop_index = getting_crop_index(crop_dict_value)
 
 similar_crops = list(enumerate(model[get_crop_index]))
+
 sorted_similar_crop = sorted(similar_crops, key=lambda x: x[1], reverse=False)
 
 
@@ -105,6 +109,7 @@ sorted_similar_state = sorted(similar_state, key=lambda x: x[1], reverse=False)
 
 @app.route('/api/v1/recommend')
 def hello_world():  # put application's code here
+  
     lst = []
     i = 0
     for crop in sorted_similar_crop:
