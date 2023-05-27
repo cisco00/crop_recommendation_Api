@@ -1,6 +1,5 @@
 import pandas as pd
-from flask import Flask, jsonify
-import pickle
+from flask import Flask
 from sklearn.metrics.pairwise import cosine_similarity
 
 app = Flask(__name__)
@@ -12,10 +11,9 @@ crop_list = {"Yam": 0, "Maize": 1, "Sorghum": 2, "Cotton": 3, "Cassava": 4,
              "Rubber": 15, "MilletsSorghum": 16, "Plaintain": 17, "Acha": 18, "SugerCane": 19, "Yam.": 20,
              "MaizeCocoa": 21}
 
-state_list = {"adamawa": 0, "bauchi": 1, "bayelsa": 2, "benue": 3, "federal capital territory": 4,
-              "kaduna": 5, "kano": 6, "katsina": 7, "kebbi": 8, "kogi": 9, "kwara": 10, "nasarawa": 11,
-              "niger": 12, "plateau": 13, "taraba": 14}
-
+state_list = {"Adamawa": 0, "Bauchi": 1, "Bayelsa": 2, "Benue": 3, "Federal Capital territory": 4,
+              "Kaduna": 5, "Kano": 6, "Katsina": 7, "Kebbi": 8, "Kogi": 9, "Kwara": 10, "Nasarawa": 11,
+              "Niger": 12, "Plateau": 13, "Taraba": 14}
 
 
 data = pd.read_csv("data_index_file.csv")
@@ -26,8 +24,6 @@ df2 = df1.iloc[:, 1:]
 
 model = cosine_similarity(df2)
 
-
-cosine_sim = cosine_similarity(numerical_data)
 
 def farmers_input():
     user_input = input("Enter a crop: ")
@@ -64,7 +60,7 @@ def switching_variables(user_entry):
 def getting_crop_index(crop):
     try:
         return final_df[final_df.MAJOR_CROP == crop]["index"].values[0]
-    except:
+    finally:
         return None
 
 
@@ -80,21 +76,21 @@ sorted_similar_crop = sorted(similar_crops, key=lambda x: x[1], reverse=False)
 def get_crop_from_index(index):
     try:
         return final_df[final_df.index == index]["MAJOR_CROP"].values[0]
-    except:
+    finally:
         return None
 
 
 def getting_state_index(state):
     try:
         return final_df[final_df.State == state]['index'].values(0)
-    except:
+    finally:
         return None
 
 
 def get_state_from_index(state):
     try:
         return final_df[final_df.index == state]["State"].values(0)
-    except:
+    finally:
         return None
 
 # getting the value of the crop key from the dictionary
@@ -108,7 +104,7 @@ sorted_similar_state = sorted(similar_state, key=lambda x: x[1], reverse=False)
 
 
 @app.route('/api/v1/recommend')
-def hello_world():  # put application's code here
+def crop_recommendation():  # put application's code here
   
     lst = []
     i = 0
@@ -119,6 +115,18 @@ def hello_world():  # put application's code here
             break
     return str(list(dict.fromkeys(lst)))
     # return str(picking_crops(farmers_input()))
+
+
+@app.route('/api/v1/recommend/state')
+def state_recommendation():
+    lst = []
+    i = 0
+    for state in sorted_similar_state:
+        lst.append(get_state_from_index(state[0]))
+        i = i+1
+        if i > 100:
+            break
+    return str(list(dict.fromkeys(lst)))
 
 
 if __name__ == '__main__':
