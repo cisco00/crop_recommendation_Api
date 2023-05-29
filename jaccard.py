@@ -4,7 +4,7 @@ from flask import Flask
 
 app = Flask(__name__)
 
-df = pd.read_csv('data/final_df.csv')
+df = pd.read_csv('data_index_file.csv')
 
 # crop recommendation based on state
 crop_state_ct = pd.crosstab(df.MAJOR_CROP, df.state)
@@ -23,6 +23,7 @@ state_recommended_crops_list = list(state_recommended_crops)
 
 predict_state = df[df['MAJOR_CROP'].isin(state_recommended_crops_list)]
 
+
 # crop recommendation based on vegetation
 crop_vegetation_ct = pd.crosstab(df.MAJOR_CROP, df.VEGETATION)
 crop_vegetation_ct
@@ -40,7 +41,7 @@ vegetation_recommended_crops_list = list(vegetation_recommended_crops)
 
 predict_vegetation = df[df['MAJOR_CROP'].isin(vegetation_recommended_crops_list)]
 
-@app.route('/api/v1/recommend/<input>')
+@app.route('/api/v1/recommend/')
 def make_recommendation(input):  # put application's code here
     if input == 'state':
         return str(predict_state.state.unique())
