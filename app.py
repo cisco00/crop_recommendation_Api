@@ -28,6 +28,7 @@ jaccard_similarity_array_vegetation = 1 - square_jaccard_dist_vegetation
 vegetation_distance_df = pd.DataFrame(jaccard_similarity_array_vegetation, index=crop_vegetation_ct.index, 
                                 columns=crop_vegetation_ct.index)
 
+
 @app.route('/api/v1/recommend/<crop>/<input>')
 def make_recommendation(crop, input):
     if input == 'state':
