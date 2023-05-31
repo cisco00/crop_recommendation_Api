@@ -4,7 +4,7 @@ from flask import Flask
 
 app = Flask(__name__)
 
-df = pd.read_csv('crop_recommendation_api\data_index_file.csv')
+df = pd.read_csv('data_index_file.csv')
 
 # crop recommendation based on state
 crop_state_ct = pd.crosstab(df.MAJOR_CROP, df.state)
