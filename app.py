@@ -1,8 +1,10 @@
 import pandas as pd
 from scipy.spatial.distance import pdist, squareform
 from flask import Flask
+from flask_restx import Api, Resource
 
 app = Flask(__name__)
+api = Api(app)
 
 df = pd.read_csv('data_index_file.csv')
 
@@ -29,25 +31,26 @@ vegetation_distance_df = pd.DataFrame(jaccard_similarity_array_vegetation, index
                                 columns=crop_vegetation_ct.index)
 
 
-@app.route('/api/v1/recommend/<crop>/<input>')
-def make_recommendation(crop, input):
-    if input == 'state':
-        # try:
-        state_recommended_crops = state_distance_df[crop.title()].sort_values(ascending=False)[:5].index.values
-        state_recommended_crops_list = list(state_recommended_crops)
-        predict_state = df[df['MAJOR_CROP'].isin(state_recommended_crops_list)]
-        return str(predict_state.state.unique()[:10])
-        # except KeyError:
-        #     return 'The inputed crop does not exist in the data'
-    elif input == 'vegetation':
-        # try:
-        vegetation_recommended_crops = vegetation_distance_df[crop.title()].sort_values(ascending=False)[:5].index.values
-        vegetation_recommended_crops_list = list(vegetation_recommended_crops)
-        predict_vegetation = df[df['MAJOR_CROP'].isin(vegetation_recommended_crops_list)]
-        return str(predict_vegetation.VEGETATION.unique()[:10])
-        # except KeyError:
-        #     return 'The inputed crop does not exist in the data'
+@api.route('/api/v1/recommend/<crop>/<input>')
+class make_recommendation(Resource):
+    def get(self, crop, input):
+        if input == 'state':
+            try:
+                state_recommended_crops = state_distance_df[crop.title()].sort_values(ascending=False)[:5].index.values
+                state_recommended_crops_list = list(state_recommended_crops)
+                predict_state = df[df['MAJOR_CROP'].isin(state_recommended_crops_list)]
+                return str(predict_state.state.unique()[:10])
+            except KeyError:
+                return 'The inputed crop does not exist in the data'
+        elif input == 'vegetation':
+            try:
+                vegetation_recommended_crops = vegetation_distance_df[crop.title()].sort_values(ascending=False)[:5].index.values
+                vegetation_recommended_crops_list = list(vegetation_recommended_crops)
+                predict_vegetation = df[df['MAJOR_CROP'].isin(vegetation_recommended_crops_list)]
+                return str(predict_vegetation.VEGETATION.unique()[:10])
+            except KeyError:
+                return 'The inputed crop does not exist in the data'
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
