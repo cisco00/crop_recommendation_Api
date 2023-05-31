@@ -1,1 +1,1 @@
-web: gunicorn app:app
+web: gunicorn app:make_recommendation
