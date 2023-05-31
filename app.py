@@ -32,21 +32,21 @@ vegetation_distance_df = pd.DataFrame(jaccard_similarity_array_vegetation, index
 @app.route('/api/v1/recommend/<crop>/<input>')
 def make_recommendation(crop, input):
     if input == 'state':
-        try:
-            state_recommended_crops = state_distance_df[crop.title()].sort_values(ascending=False)[:5].index.values
-            state_recommended_crops_list = list(state_recommended_crops)
-            predict_state = df[df['MAJOR_CROP'].isin(state_recommended_crops_list)]
-            return str(predict_state.state.unique()[:10])
-        except KeyError:
-            return 'The inputed crop does not exist in the data'
+        # try:
+        state_recommended_crops = state_distance_df[crop.title()].sort_values(ascending=False)[:5].index.values
+        state_recommended_crops_list = list(state_recommended_crops)
+        predict_state = df[df['MAJOR_CROP'].isin(state_recommended_crops_list)]
+        return str(predict_state.state.unique()[:10])
+        # except KeyError:
+        #     return 'The inputed crop does not exist in the data'
     elif input == 'vegetation':
-        try:
-            vegetation_recommended_crops = vegetation_distance_df[crop.title()].sort_values(ascending=False)[:5].index.values
-            vegetation_recommended_crops_list = list(vegetation_recommended_crops)
-            predict_vegetation = df[df['MAJOR_CROP'].isin(vegetation_recommended_crops_list)]
-            return str(predict_vegetation.VEGETATION.unique()[:10])
-        except KeyError:
-            return 'The inputed crop does not exist in the data'
+        # try:
+        vegetation_recommended_crops = vegetation_distance_df[crop.title()].sort_values(ascending=False)[:5].index.values
+        vegetation_recommended_crops_list = list(vegetation_recommended_crops)
+        predict_vegetation = df[df['MAJOR_CROP'].isin(vegetation_recommended_crops_list)]
+        return str(predict_vegetation.VEGETATION.unique()[:10])
+        # except KeyError:
+        #     return 'The inputed crop does not exist in the data'
 
 
 if __name__ == '__main__':
