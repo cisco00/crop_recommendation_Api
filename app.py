@@ -32,7 +32,7 @@ vegetation_distance_df = pd.DataFrame(jaccard_similarity_array_vegetation, index
 @api.route('/api/v1/recommend/<crop>/<input>')
 class make_recommendation(Resource):
     def get(self, crop, input):
-        if input == 'state':
+        if input.lower() == 'state':
             try:
                 state_recommended_crops = state_distance_df[crop.title()].sort_values(ascending=False)[:5].index.values
                 state_recommended_crops_list = list(state_recommended_crops)
@@ -40,7 +40,7 @@ class make_recommendation(Resource):
                 return str(predict_state.state.unique()[:10])
             except KeyError:
                 return 'The inputed crop does not exist in the data'
-        elif input == 'vegetation':
+        elif input.lower() == 'vegetation':
             try:
                 vegetation_recommended_crops = vegetation_distance_df[crop.title()].sort_values(ascending=False)[:5].index.values
                 vegetation_recommended_crops_list = list(vegetation_recommended_crops)
