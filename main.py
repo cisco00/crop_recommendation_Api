@@ -32,7 +32,7 @@ def picking_crops(crop):
     if crop in crop_list:
         value = crop_list[crop]
     else:
-        return -1
+        return 404
     return value
 
 
@@ -40,7 +40,7 @@ def picking_state(state):
     if state in state_list:
         value = state_list[state]
     else:
-        return -1
+        return 404
     return value
 
 
