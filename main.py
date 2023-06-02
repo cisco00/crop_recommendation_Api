@@ -19,6 +19,8 @@ final_df = data.iloc[:, 1:]
 
 df1 = pd.read_csv('crops_dataset_model_building.csv')
 df2 = df1.iloc[:, 1:]
+df2.set_index('index', inplace=True)
+df2.reset_index(inplace=True)
 
 model = cosine_similarity(df2)
 
@@ -32,7 +34,7 @@ def picking_crops(crop):
     if crop in crop_list:
         value = crop_list[crop]
     else:
-        return -1
+        return 404
     return value
 
 
@@ -40,7 +42,7 @@ def picking_state(state):
     if state in state_list:
         value = state_list[state]
     else:
-        return -1
+        return 404
     return value
 
 
@@ -56,17 +58,11 @@ def switching_variables(user_entry):
 
 
 def getting_crop_index(crop):
-    try:
-        return final_df[final_df.MAJOR_CROP == crop]["index"].values[0]
-    finally:
-        return None
+    return df2[df2.MAJOR_CROP == crop]["index"].values[0]
 
 
 def get_crop_from_index(index):
-    try:
-        return final_df[final_df.index == index]["MAJOR_CROP"].values[0]
-    finally:
-        return None
+    return final_df[final_df.index == index]["MAJOR_CROP"].values[0]
 
 
 crop_dict_value = switching_variables(farmers_input)
@@ -105,17 +101,21 @@ def get_state_from_index(state):
 state_dict_value = switching_variables(farmers_input)
 get_state_index = getting_state_index(state_dict_value)
 similar_state = list(enumerate(model[get_state_index]))
-sorted_similar_state = sorted(similar_state, key=lambda x: x[1], reverse=False)
+sorted_similar_state = sorted(similar_state, key=lambda x: x[1], reverse=True)
 
 
 @app.route('/api/v1/recommend/crop', method=['Get', 'Post'])
 def crop_recommendation():  # put application's code here
+    crop_dict_value = switching_variables(farmers_input())
+    get_crop_index = getting_crop_index(crop_dict_value)
+    similar_crops = list(enumerate(model[get_crop_index]))
+    sorted_similar_crop = sorted(similar_crops, key=lambda x: x[1], reverse=True)
     lists = []
     count = 1
     for crop in sorted_similar_crop:
         lists.append(get_crop_from_index(crop[0]))
         count = count+1
-        if count > 100:
+        if count > 5:
             break
     return str(list(dict.fromkeys(lists)))
     # return str(picking_crops(farmers_input()))
