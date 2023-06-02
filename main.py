@@ -17,7 +17,7 @@ state_list = {"Adamawa": 0, "Bauchi": 1, "Bayelsa": 2, "Benue": 3, "Federal Capi
 data = pd.read_csv("data_index_file.csv")
 final_df = data.iloc[:, 1:]
 
-df1 = pd.read_csv('crops_dataset_model_building.csv')
+df1 = pd.read_csv('models/crops_dataset_model_building.csv')
 df2 = df1.iloc[:, 1:]
 df2.set_index('index', inplace=True)
 df2.reset_index(inplace=True)
