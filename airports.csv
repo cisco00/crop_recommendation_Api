@@ -1,0 +1,65 @@
+ident,type,name,latitude_deg,longitude_deg,elevation_ft,region_name,scheduled_service
+DNMM,large_airport,Murtala Muhammed International Airport,6.577370167,3.321160078,135,Lagos State,1
+DNAA,large_airport,Nnamdi Azikiwe International Airport,9.006790161,7.263169765,1123,Abuja Capital Territory,1
+DNPO,medium_airport,Port Harcourt International Airport,5.015490055,6.949590206,87,Rivers State,1
+DNKN,medium_airport,Mallam Aminu International Airport,12.0476,8.52462,1562,Kano State,1
+NG-QRW,medium_airport,Warri Airport,5.59611,5.81778,242,Delta State,1
+DNBE,medium_airport,Benin Airport,6.316979885,5.599500179,258,Edo State,1
+DNKA,medium_airport,Kaduna Airport,10.6960001,7.320109844,2073,Kaduna State,1
+DNMA,medium_airport,Maiduguri International Airport,11.85529995,13.08090019,1099,Borno State,1
+DNAS,medium_airport,Asaba International Airport,6.204167,6.665278,305,Delta State,0
+DNIB,medium_airport,Ibadan Airport,7.362460136,3.978329897,725,Oyo State,1
+NG-0003,medium_airport,Gombe Lawanti International Airport,10.298889,10.9,1590,Gombe State,1
+DNMK,medium_airport,Makurdi Airport,7.70388,8.61394,371,Benue State,1
+DNAI,medium_airport,Akwa Ibom International Airport,4.8725,8.093,170,Akwa Ibom State,1
+DNMN,medium_airport,Minna Airport,9.652170181,6.462259769,834,Niger State,0
+DNCA,medium_airport,Margaret Ekpo International Airport,4.976019859,8.347200394,210,Cross River State,1
+DNEN,medium_airport,Akanu Ibiam International Airport,6.474269867,7.56196022,466,Enugu State,1
+DNIL,medium_airport,Ilorin International Airport,8.440210342,4.493919849,1126,Kwara State,1
+DNSO,medium_airport,Sadiq Abubakar III International Airport,12.91629982,5.207190037,1010,Sokoto State,1
+DNYO,medium_airport,Yola Airport,9.25755024,12.43039989,599,Adamawa State,1
+NG-0005,small_airport,Srr Ahmadu Bello International Airport,12.480556,4.369445,775,Kebbi State,1
+NG-0004,small_airport,Port Harcourt City Airport / Port Harcourt Air Force Base,4.846111,7.021389,57,Rivers State,1
+NG-BCU,small_airport,Bauchi Airport,10.294402,9.816672,1998,Bauchi State,0
+DN56,small_airport,Escravos Airport,5.61673,5.188485,10,Delta State,0
+DNFD,small_airport,Forçados Terminal Airport,5.355,5.349002,11,Delta State,0
+DN57,small_airport,Katsina Airport,13.0078,7.66045,1660,Katsina State,0
+DNJO,medium_airport,Yakubu Gowon Airport,9.639829636,8.869050026,4232,Plateau State,1
+DNAK,medium_airport,Akure Airport,7.246739864,5.301010132,1100,Ondo State,1
+DNIM,medium_airport,Sam Mbakwe International Airport,5.427060127,7.206029892,373,Imo State,1
+DNBC,medium_airport,Sir Abubakar Tafawa Balewa International Airport,10.482833,9.744,1965,Bauchi State,1
+DNBY,medium_airport,Bayelsa International Airport,4.95759,6.203327,67,Bayelsa State,1
+DNGU,medium_airport,Gusau Airport,12.1717,6.69611,1520,Zamfara State,0
+DNZA,medium_airport,Zaria Airport,11.1302,7.68581,2170,Kaduna State,0
+DN53,small_airport,Kaduna Old Airport,10.59889984,7.448709965,2126,Kaduna State,0
+DN50,small_airport,Shiroro Airport,9.88465023,6.818630219,1305,Niger State,0
+DN51,small_airport,Ajaokuta Airport,7.457871,6.460837,620,Kogi State,0
+DN54,small_airport,Bajoga Northeast Airport,10.91989994,11.50119972,1000,Gombe State,0
+DNBB,small_airport,Bebi Airport,6.6215,9.319001,919,Cross River State,0
+DNBI,small_airport,Bida Airport,9.100000381,6.017000198,450,Niger State,0
+DNDS,small_airport,Dutse International Airport,11.795168,9.311667,1365,Jigawa State,0
+DN55,small_airport,Eket Airport,4.642182,7.94904,47,Akwa Ibom State,0
+DNFB,small_airport,Finima Bonny Airport,4.405856,7.181907,,Rivers State,0
+DNJA,small_airport,Jalingo Airport,8.900587,11.27946,685,Taraba State,0
+NG-0007,small_airport,Lokoja Airstrip,7.801829,6.582793,320,Kogi State,0
+NG-0002,small_airport,Kainji Air Base,9.895279,4.484224,689,Niger State,0
+NG-0006,small_airport,Okpoma Airport,4.29802,6.27635,47,Bayelsa State,0
+DNOS,small_airport,Oshogbo Airport,7.782999992,4.482999802,997,Osun State,0
+NG-0016,heliport,June 12 Cultural Centre Abeokuta Helipad,7.1356,3.35426,,Ogun State,0
+NG-0015,heliport,Olusegun Obasanjo Presidential Library Abeokuta Helipad,7.12457,3.36565,,Ogun State,0
+NG-0020,heliport,Aso Rock Heliport,9.060744,7.515767,,Abuja Capital Territory,0
+NG-0022,heliport,Moshood Abiola National Stadium Helipad,9.037663,7.450715,,Abuja Capital Territory,0
+NG-0023,heliport,AMSH Helipad,7.601521,5.307133,,Ekiti State,0
+NG-0001,closed,Agbara-Otor Airport,5.538911,6.088,43,Delta State,0
+NG-0010,heliport,Mazi Alex Otti Heliport,5.38936,7.90098,,Abia State,0
+NG-0024,closed,Bacita Airstrip,9.0421,4.9188,489,Kwara State,0
+NG-0009,heliport,Nigeria LNG Helipad,4.38406,7.18491,,Rivers State,0
+NG-0014,heliport,Daura Heliport,13.05149,8.30958,,Katsina State,0
+NG-0025,heliport,Forçados Terminal Heliport,5.35986,5.35239,11,Delta State,0
+NG-0021,heliport,Maryland Heliport,6.572639,3.366441,95,Lagos State,0
+NG-0018,heliport,Otuoke Heliport,4.78744,6.29216,,Bayelsa State,0
+NG-0011,heliport,Shell Industrial Area Heliport,4.82821,7.03292,,Rivers State,0
+NG-0012,heliport,Agip Heliport,4.7992,6.97343,,Rivers State,0
+NG-0013,heliport,Exxon Mobil Aba Road Estate Heliport,4.86782,7.08422,,Rivers State,0
+NG-0008,closed,Suntai Airstrip,7.909458,10.374472,475,Taraba State,0
+NG-0019,heliport,Yenagoa Heliport,4.95212,6.2714,,Bayelsa State,0
