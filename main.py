@@ -138,4 +138,4 @@ def state_max_output_recommendation():
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
