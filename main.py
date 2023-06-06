@@ -1,5 +1,5 @@
 import pandas as pd
-from flask import Flask
+from flask import Flask, request, render_template
 from sklearn.metrics.pairwise import cosine_similarity
 
 app = Flask(__name__)
@@ -14,10 +14,10 @@ state_list = {"Adamawa": 0, "Bauchi": 1, "Bayelsa": 2, "Benue": 3, "Federal Capi
               "Kaduna": 5, "Kano": 6, "Katsina": 7, "Kebbi": 8, "Kogi": 9, "Kwara": 10, "Nasarawa": 11,
               "Niger": 12, "Plateau": 13, "Taraba": 14}
 
-data = pd.read_csv("data_index_file.csv")
+data = pd.read_csv("C:/Users/USER/Documents/projects/data/mungin/crop_recommendation_api/data_index_file.csv")
 final_df = data.iloc[:, 1:]
 
-df1 = pd.read_csv('model_building.csv')
+df1 = pd.read_csv('C:/Users/USER/Documents/projects/data/mungin/crop_recommendation_api/model_building.csv')
 df2 = df1.iloc[:, 1:]
 df2.set_index('index', inplace=True)
 df2.reset_index(inplace=True)
@@ -26,7 +26,7 @@ model = cosine_similarity(df2)
 
 
 def farmers_input():
-    user_input = input("Enter a crop: ")
+    user_input = request.form()
     return user_input
 
 
@@ -86,14 +86,14 @@ sorted_similar_state_with_max = sorted(state_with_max, key=lambda x: x[1], rever
 
 def getting_state_index(state):
     try:
-        return final_df[final_df.State == state]['index'].values(0)
+        return final_df[final_df.State == state]['index'].values[0]
     finally:
         return None
 
 
 def get_state_from_index(state):
     try:
-        return final_df[final_df.index == state]["State"].values(0)
+        return final_df[final_df.index == state]["State"].values[0]
     finally:
         return None
 
@@ -104,21 +104,24 @@ similar_state = list(enumerate(model[get_state_index]))
 sorted_similar_state = sorted(similar_state, key=lambda x: x[1], reverse=True)
 
 
-@app.route('/api/v1/recommend/crop', method=['Get', 'Post'])
+@app.route('/api/v1/recommend/crop', method=['GET', 'POST'])
 def crop_recommendation():  # put application's code here
-    crop_dict_value = switching_variables(farmers_input())
-    get_crop_index = getting_crop_index(crop_dict_value)
-    similar_crops = list(enumerate(model[get_crop_index]))
-    sorted_similar_crop = sorted(similar_crops, key=lambda x: x[1], reverse=True)
-    lists = []
-    count = 1
-    for crop in sorted_similar_crop:
-        lists.append(get_crop_from_index(crop[0]))
-        count = count+1
-        if count > 5:
-            break
-    return str(list(dict.fromkeys(lists)))
-    # return str(picking_crops(farmers_input()))
+    if request.method == 'POST':
+        crop_dict_value = switching_variables(farmers_input())
+        get_crop_index = getting_crop_index(crop_dict_value)
+        similar_crops = list(enumerate(model[get_crop_index]))
+        sorted_similar_crop = sorted(similar_crops, key=lambda x: x[1], reverse=True)
+        lists = []
+        count = 1
+        for crop in sorted_similar_crop:
+            lists.append(get_crop_from_index(crop[0]))
+            count = count+1
+            if count > 5:
+                break
+        return str(list(dict.fromkeys(lists)))
+        # return str(picking_crops(farmers_input()))
+        
+    return render_template('index.html')
 
 
 @app.route('/api/v1/recommend/crop-state', method=['POST', 'GET'])
