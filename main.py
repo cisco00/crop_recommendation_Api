@@ -72,10 +72,7 @@ sorted_similar_crop = sorted(similar_crops, key=lambda x: x[1], reverse=False)
 
 
 def state_with_max_crop_output(index):
-    try:
-        return final_df[final_df.index == index]['State'].values[0]
-    finally:
-        return None
+    return final_df[final_df.index == index]['State'].values[0]
 
 
 state_for_crop = switching_variables(farmers_input)
@@ -85,17 +82,11 @@ sorted_similar_state_with_max = sorted(state_with_max, key=lambda x: x[1], rever
 
 
 def getting_state_index(state):
-    try:
-        return final_df[final_df.State == state]['index'].values[0]
-    finally:
-        return None
+    return final_df[final_df.State == state]['index'].values[0]
 
 
 def get_state_from_index(state):
-    try:
-        return final_df[final_df.index == state]["State"].values[0]
-    finally:
-        return None
+    return final_df[final_df.index == state]["State"].values[0]
 
 
 state_dict_value = switching_variables(farmers_input)
@@ -150,4 +141,4 @@ def state_max_output_recommendation():
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
