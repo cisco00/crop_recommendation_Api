@@ -58,6 +58,7 @@ def switching_variables(user_entry):
 
 
 def getting_crop_index(crop):
+    print(df2[df2.MAJOR_CROP == crop]["index"].values[0])
     return df2[df2.MAJOR_CROP == crop]["index"].values[0]
 
 
@@ -98,10 +99,10 @@ sorted_similar_state = sorted(similar_state, key=lambda x: x[1], reverse=True)
 @app.route('/api/v1/recommend/crop', method=['GET', 'POST'])
 def crop_recommendation():  # put application's code here
     if request.method == 'POST':
-        crop_dict_value = switching_variables(farmers_input())
-        get_crop_index = getting_crop_index(crop_dict_value)
-        similar_crops = list(enumerate(model[get_crop_index]))
-        sorted_similar_crop = sorted(similar_crops, key=lambda x: x[1], reverse=True)
+        # crop_dict_value = switching_variables(farmers_input())
+        # get_crop_index = getting_crop_index(crop_dict_value)
+        # similar_crops = list(enumerate(model[get_crop_index]))
+        # sorted_similar_crop = sorted(similar_crops, key=lambda x: x[1], reverse=True)
         lists = []
         count = 1
         for crop in sorted_similar_crop:
@@ -141,4 +142,4 @@ def state_max_output_recommendation():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
