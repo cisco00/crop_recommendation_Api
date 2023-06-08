@@ -1,14 +1,15 @@
 import pandas as pd
 from scipy.spatial.distance import pdist, squareform
 from flask import Flask
+from flask_restx import Api, Resource
 
 app = Flask(__name__)
+api = Api(app)
 
 df = pd.read_csv('data_index_file.csv')
 
 # crop recommendation based on state
 crop_state_ct = pd.crosstab(df.MAJOR_CROP, df.state)
-crop_state_ct
 
 jaccard_dist_state = pdist(crop_state_ct.values, metric='jaccard')
 square_jaccard_dist_state = squareform(jaccard_dist_state)
@@ -19,7 +20,6 @@ state_distance_df = pd.DataFrame(jaccard_similarity_array_state, index=crop_stat
 
 # crop recommendation based on vegetation
 crop_vegetation_ct = pd.crosstab(df.MAJOR_CROP, df.VEGETATION)
-crop_vegetation_ct
 
 jaccard_dist_vegetation = pdist(crop_vegetation_ct.values, metric='jaccard')
 square_jaccard_dist_vegetation = squareform(jaccard_dist_vegetation)
@@ -50,4 +50,4 @@ def make_recommendation(crop, input):
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
