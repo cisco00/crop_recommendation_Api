@@ -1,5 +1,5 @@
 import pandas as pd
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, request, render_template
 from sklearn.metrics.pairwise import cosine_similarity
 
 app = Flask(__name__)
@@ -14,10 +14,10 @@ state_list = {"Adamawa": 0, "Bauchi": 1, "Bayelsa": 2, "Benue": 3, "Federal Capi
               "Kaduna": 5, "Kano": 6, "Katsina": 7, "Kebbi": 8, "Kogi": 9, "Kwara": 10, "Nasarawa": 11,
               "Niger": 12, "Plateau": 13, "Taraba": 14}
 
-data = pd.read_csv("data_index_file.csv")
+data = pd.read_csv("C:/Users/USER/Documents/projects/data/mungin/crop_recommendation_api/data_index_file.csv")
 final_df = data.iloc[:, 1:]
 
-df1 = pd.read_csv('model_building.csv')
+df1 = pd.read_csv('C:/Users/USER/Documents/projects/data/mungin/crop_recommendation_api/model_building.csv')
 df2 = df1.iloc[:, 1:]
 df2.set_index('index', inplace=True)
 df2.reset_index(inplace=True)
@@ -53,6 +53,7 @@ def switching_variables(user_entry):
 
 
 def getting_crop_index(crop):
+    print(df2[df2.MAJOR_CROP == crop]["index"].values[0])
     return df2[df2.MAJOR_CROP == crop]["index"].values[0]
 
 
