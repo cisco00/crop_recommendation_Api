@@ -85,7 +85,7 @@ def get_state_from_index(state):
         return None
 
 
-@app.route('/api/v1/recommend/crop', methods=['GET', 'POST'])
+@app.route('/api/v1/recommend', methods=['GET', 'POST'])
 def make_recommendation():
     if request.method == 'POST':
         crop_input = request.form['input_field']
@@ -140,4 +140,4 @@ def make_recommendation():
 #
 
 if __name__ == '__main__':
-    app.run()
+    app.run(port=8000, host='0.0.0.0')
