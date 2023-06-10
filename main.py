@@ -128,4 +128,4 @@ def make_recommendation():
 #
 
 if __name__ == '__main__':
-    app.run()
+    app.run(port=8000, host='0.0.0.0')
