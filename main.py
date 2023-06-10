@@ -1,5 +1,5 @@
 import pandas as pd
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, request, render_template
 from sklearn.metrics.pairwise import cosine_similarity
 
 app = Flask(__name__)
@@ -14,11 +14,13 @@ state_list = {"Adamawa": 0, "Bauchi": 1, "Bayelsa": 2, "Benue": 3, "Federal Capi
               "Kaduna": 5, "Kano": 6, "Katsina": 7, "Kebbi": 8, "Kogi": 9, "Kwara": 10, "Nasarawa": 11,
               "Niger": 12, "Plateau": 13, "Taraba": 14}
 
-data = pd.read_csv("data_index_file.csv")
+data = pd.read_csv("C:/Users/USER/Documents/projects/data/mungin/crop_recommendation_api/data_index_file.csv")
 final_df = data.iloc[:, 1:]
 
-df1 = pd.read_csv('model_building.csv')
+df1 = pd.read_csv('C:/Users/USER/Documents/projects/data/mungin/crop_recommendation_api/model_building.csv')
 df2 = df1.iloc[:, 1:]
+df2.set_index('index', inplace=True)
+df2.reset_index(inplace=True)
 
 model = cosine_similarity(df2)
 
@@ -27,7 +29,7 @@ def picking_crops(crop):
     if crop in crop_list:
         value = crop_list[crop]
     else:
-        return -1
+        return 404
     return value
 
 
@@ -35,7 +37,7 @@ def picking_state(state):
     if state in state_list:
         value = state_list[state]
     else:
-        return -1
+        return 404
     return value
 
 
@@ -51,41 +53,27 @@ def switching_variables(user_entry):
 
 
 def getting_crop_index(crop):
-    try:
-        return final_df[final_df.MAJOR_CROP == crop]["index"].values[0]
-    finally:
-        return None
+    print(df2[df2.MAJOR_CROP == crop]["index"].values[0])
+    return df2[df2.MAJOR_CROP == crop]["index"].values[0]
 
 
 def get_crop_from_index(index):
-    try:
-        return final_df[final_df.index == index]["MAJOR_CROP"].values[0]
-    finally:
-        return None
+    return final_df[final_df.index == index]["MAJOR_CROP"].values[0]
 
 
 def state_with_max_crop_output(index):
-    try:
-        return final_df[final_df.index == index]['State'].values[0]
-    finally:
-        return None
+    return final_df[final_df.index == index]['State'].values[0]
 
 
 def getting_state_index(state):
-    try:
-        return final_df[final_df.State == state]['index'].values(0)
-    finally:
-        return None
+    return final_df[final_df.State == state]['index'].values[0]
 
 
 def get_state_from_index(state):
-    try:
-        return final_df[final_df.index == state]["State"].values(0)
-    finally:
-        return None
+    return final_df[final_df.index == state]["State"].values[0]
 
-
-@app.route('/api/v1/recommend', methods=['GET', 'POST'])
+  
+@app.route('/api/v1/recommend/crop', methods=['GET', 'POST'])
 def make_recommendation():
     if request.method == 'POST':
         crop_input = request.form['input_field']
